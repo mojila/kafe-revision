@@ -135,5 +135,14 @@
       <End Role="Menu" EntitySet="Menus" />
       <End Role="Recipe" EntitySet="Recipes" />
     </AssociationSet>
+    <EntitySet Name="MenuViews" EntityType="Database2019Model.MenuView" />
   </EntityContainer>
+  <EntityType Name="MenuView">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="price" Type="Int32" />
+  </EntityType>
 </Schema>

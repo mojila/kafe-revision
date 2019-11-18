@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Data;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace Kafe
 {
@@ -13,8 +16,28 @@ namespace Kafe
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            hideAll();
-            showLogin();
+            //hideAll();
+            //showLogin();
+            loadMenu();
+        }
+
+        private List<MenuView> searchMenu(string keyword)
+        {
+            using (Database2019EntitiesRevision database = new Database2019EntitiesRevision())
+            {
+                List<MenuView> list = database.MenuViews.Where(d => d.name.Contains(keyword)).ToList<MenuView>();
+
+                return list;
+            }
+        }
+
+        private void loadMenu()
+        {
+            using (Database2019EntitiesRevision database = new Database2019EntitiesRevision())
+            {
+                List<MenuView> list = database.MenuViews.ToList<MenuView>();
+                dataGridView1.DataSource = list;
+            }
         }
 
         private void hideAll()
@@ -43,6 +66,34 @@ namespace Kafe
                     label1.Text = loginnedUser.name;
                     showAll();
                 }
+            }
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            dataGridView1.DataSource = searchMenu(textBox1.Text);
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            int selected = 0;
+
+            try
+            {
+                selected = Convert.ToInt32(dataGridView1.SelectedCells[0].Value);
+            } catch (Exception _e)
+            {
+                MessageBox.Show("No Selected Item.");
             }
         }
     }

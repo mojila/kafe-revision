@@ -15,6 +15,7 @@
         <AssociationConnector Association="Database2019Model.FK_Recipe_Material" ManuallyRouted="false" />
         <AssociationConnector Association="Database2019Model.FK_User_RoleUser" ManuallyRouted="false" />
         <AssociationConnector Association="Database2019Model.FK_Recipe_Menu" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Database2019Model.MenuView" Width="1.5" PointX="2.875" PointY="4.875" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

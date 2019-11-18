@@ -96,6 +96,9 @@
     <Compile Include="Menu.cs">
       <DependentUpon>Model2019.tt</DependentUpon>
     </Compile>
+    <Compile Include="MenuView.cs">
+      <DependentUpon>Model2019.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model2019.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
