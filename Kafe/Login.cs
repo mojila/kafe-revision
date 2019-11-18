@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Kafe
@@ -27,12 +22,12 @@ namespace Kafe
 
         private void button1_Click(object sender, EventArgs e)
         {
-            using (Database2019Entities database = new Database2019Entities())
+            using (Database2019EntitiesRevision database = new Database2019EntitiesRevision())
             {
-                user user = database.user.Where(d => d.username == textBox1.Text && d.password == maskedTextBox1.Text)
-                    .FirstOrDefault<user>();
-                id_user = user.Id;
-                userView = database.UserView.Where(d => d.Id == id_user)
+                Member member = database.Members.Where(d => d.username == textBox1.Text && d.password == maskedTextBox1.Text)
+                    .FirstOrDefault<Member>();
+                id_user = member.Id;
+                userView = database.UserViews.Where(d => d.Id == id_user)
                     .FirstOrDefault<UserView>();
                 this.DialogResult = DialogResult.OK;
             }

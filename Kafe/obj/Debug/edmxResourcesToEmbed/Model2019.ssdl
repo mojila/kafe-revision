@@ -1,60 +1,140 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="Database2019Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityType Name="role">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="role_name" Type="varchar" MaxLength="50" />
-  </EntityType>
-  <EntityType Name="user">
+  <EntityType Name="Material">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="stock" Type="varchar" MaxLength="50" />
+    <Property Name="price" Type="int" />
+    <Property Name="distributor" Type="int" />
+  </EntityType>
+  <EntityType Name="Member">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="address" Type="varchar" MaxLength="50" />
+    <Property Name="phone" Type="varchar" MaxLength="50" />
+    <Property Name="join_date" Type="date" />
     <Property Name="username" Type="varchar" MaxLength="50" />
     <Property Name="password" Type="varchar" MaxLength="50" />
     <Property Name="role" Type="int" />
-    <Property Name="join_date" Type="date" />
+  </EntityType>
+  <EntityType Name="Menu">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="price" Type="int" />
+  </EntityType>
+  <EntityType Name="Recipe">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="menu" Type="int" />
+    <Property Name="material" Type="int" />
+    <Property Name="material_consume" Type="int" />
+  </EntityType>
+  <EntityType Name="RoleUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6002: The table/view 'C:\USERS\MOJIA\SOURCE\REPOS\KAFE\KAFE\DATABASE2019.MDF.dbo.user_view' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-  <EntityType Name="user_view">
+warning 6002: The table/view 'C:\USERS\MOJIA\SOURCE\REPOS\KAFE\KAFE\DATABASE2019.MDF.dbo.UserView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="UserView">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" Nullable="false" />
     <Property Name="name" Type="varchar" MaxLength="50" />
-    <Property Name="role_name" Type="varchar" MaxLength="50" />
+    <Property Name="role" Type="varchar" MaxLength="50" />
     <Property Name="join_date" Type="date" />
   </EntityType>
-  <Association Name="FK_User_ToRole">
-    <End Role="role" Type="Self.role" Multiplicity="0..1" />
-    <End Role="user" Type="Self.user" Multiplicity="*" />
+  <Association Name="FK_Material_Distributor">
+    <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
+    <End Role="Material" Type="Self.Material" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="role">
+      <Principal Role="Member">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="user">
+      <Dependent Role="Material">
+        <PropertyRef Name="distributor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Recipe_Material">
+    <End Role="Material" Type="Self.Material" Multiplicity="0..1" />
+    <End Role="Recipe" Type="Self.Recipe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Material">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Recipe">
+        <PropertyRef Name="material" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Recipe_Menu">
+    <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+    <End Role="Recipe" Type="Self.Recipe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Menu">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Recipe">
+        <PropertyRef Name="menu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_RoleUser">
+    <End Role="RoleUser" Type="Self.RoleUser" Multiplicity="0..1" />
+    <End Role="Member" Type="Self.Member" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RoleUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Member">
         <PropertyRef Name="role" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="Database2019ModelStoreContainer">
-    <EntitySet Name="role" EntityType="Self.role" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="user_view" EntityType="Self.user_view" store:Type="Views" store:Schema="dbo">
+    <EntitySet Name="Material" EntityType="Self.Material" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Member" EntityType="Self.Member" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Recipe" EntityType="Self.Recipe" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RoleUser" EntityType="Self.RoleUser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserView" EntityType="Self.UserView" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
-    [user_view].[Id] AS [Id], 
-    [user_view].[name] AS [name], 
-    [user_view].[role_name] AS [role_name], 
-    [user_view].[join_date] AS [join_date]
-    FROM [dbo].[user_view] AS [user_view]</DefiningQuery>
+    [UserView].[Id] AS [Id], 
+    [UserView].[name] AS [name], 
+    [UserView].[role] AS [role], 
+    [UserView].[join_date] AS [join_date]
+    FROM [dbo].[UserView] AS [UserView]</DefiningQuery>
     </EntitySet>
-    <AssociationSet Name="FK_User_ToRole" Association="Self.FK_User_ToRole">
-      <End Role="role" EntitySet="role" />
-      <End Role="user" EntitySet="user" />
+    <AssociationSet Name="FK_Material_Distributor" Association="Self.FK_Material_Distributor">
+      <End Role="Member" EntitySet="Member" />
+      <End Role="Material" EntitySet="Material" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Recipe_Material" Association="Self.FK_Recipe_Material">
+      <End Role="Material" EntitySet="Material" />
+      <End Role="Recipe" EntitySet="Recipe" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Recipe_Menu" Association="Self.FK_Recipe_Menu">
+      <End Role="Menu" EntitySet="Menu" />
+      <End Role="Recipe" EntitySet="Recipe" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_RoleUser" Association="Self.FK_User_RoleUser">
+      <End Role="RoleUser" EntitySet="RoleUser" />
+      <End Role="Member" EntitySet="Member" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

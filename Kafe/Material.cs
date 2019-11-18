@@ -17,7 +17,7 @@ namespace Kafe
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Material()
         {
-            this.Recipe = new HashSet<Recipe>();
+            this.Recipes = new HashSet<Recipe>();
         }
     
         public int Id { get; set; }
@@ -26,8 +26,8 @@ namespace Kafe
         public Nullable<int> price { get; set; }
         public Nullable<int> distributor { get; set; }
     
-        public virtual Distributor Distributor1 { get; set; }
+        public virtual Member Member { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Recipe> Recipe { get; set; }
+        public virtual ICollection<Recipe> Recipes { get; set; }
     }
 }

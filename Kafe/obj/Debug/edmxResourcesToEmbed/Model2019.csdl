@@ -1,53 +1,139 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="Database2019Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="role">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="role_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="user" Relationship="Self.FK_User_ToRole" FromRole="role" ToRole="user" />
-  </EntityType>
-  <EntityType Name="user">
+  <EntityType Name="Material">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="stock" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="price" Type="Int32" />
+    <Property Name="distributor" Type="Int32" />
+    <NavigationProperty Name="Member" Relationship="Self.FK_Material_Distributor" FromRole="Material" ToRole="Member" />
+    <NavigationProperty Name="Recipes" Relationship="Self.FK_Recipe_Material" FromRole="Material" ToRole="Recipe" />
+  </EntityType>
+  <EntityType Name="Member">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="join_date" Type="DateTime" Precision="0" />
     <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="role" Type="Int32" />
-    <Property Name="join_date" Type="DateTime" Precision="0" />
-    <NavigationProperty Name="role1" Relationship="Self.FK_User_ToRole" FromRole="user" ToRole="role" />
+    <NavigationProperty Name="Materials" Relationship="Self.FK_Material_Distributor" FromRole="Member" ToRole="Material" />
+    <NavigationProperty Name="RoleUser" Relationship="Self.FK_User_RoleUser" FromRole="Member" ToRole="RoleUser" />
   </EntityType>
-  <EntityType Name="user_view">
+  <EntityType Name="Menu">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="price" Type="Int32" />
+    <NavigationProperty Name="Recipes" Relationship="Self.FK_Recipe_Menu" FromRole="Menu" ToRole="Recipe" />
+  </EntityType>
+  <EntityType Name="Recipe">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="menu" Type="Int32" />
+    <Property Name="material" Type="Int32" />
+    <Property Name="material_consume" Type="Int32" />
+    <NavigationProperty Name="Material1" Relationship="Self.FK_Recipe_Material" FromRole="Recipe" ToRole="Material" />
+    <NavigationProperty Name="Menu1" Relationship="Self.FK_Recipe_Menu" FromRole="Recipe" ToRole="Menu" />
+  </EntityType>
+  <EntityType Name="RoleUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Members" Relationship="Self.FK_User_RoleUser" FromRole="RoleUser" ToRole="Member" />
+  </EntityType>
+  <EntityType Name="UserView">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" />
     <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="role_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="join_date" Type="DateTime" Precision="0" />
   </EntityType>
-  <Association Name="FK_User_ToRole">
-    <End Role="role" Type="Self.role" Multiplicity="0..1" />
-    <End Role="user" Type="Self.user" Multiplicity="*" />
+  <Association Name="FK_Material_Distributor">
+    <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
+    <End Role="Material" Type="Self.Material" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="role">
+      <Principal Role="Member">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="user">
+      <Dependent Role="Material">
+        <PropertyRef Name="distributor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Recipe_Material">
+    <End Role="Material" Type="Self.Material" Multiplicity="0..1" />
+    <End Role="Recipe" Type="Self.Recipe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Material">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Recipe">
+        <PropertyRef Name="material" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_RoleUser">
+    <End Role="RoleUser" Type="Self.RoleUser" Multiplicity="0..1" />
+    <End Role="Member" Type="Self.Member" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RoleUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Member">
         <PropertyRef Name="role" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="Database2019Entities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="role" EntityType="Self.role" />
-    <EntitySet Name="user" EntityType="Self.user" />
-    <EntitySet Name="user_view" EntityType="Self.user_view" />
-    <AssociationSet Name="FK_User_ToRole" Association="Self.FK_User_ToRole">
-      <End Role="role" EntitySet="role" />
-      <End Role="user" EntitySet="user" />
+  <Association Name="FK_Recipe_Menu">
+    <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+    <End Role="Recipe" Type="Self.Recipe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Menu">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Recipe">
+        <PropertyRef Name="menu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Database2019EntitiesRevision" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Materials" EntityType="Self.Material" />
+    <EntitySet Name="Members" EntityType="Self.Member" />
+    <EntitySet Name="Menus" EntityType="Self.Menu" />
+    <EntitySet Name="Recipes" EntityType="Self.Recipe" />
+    <EntitySet Name="RoleUsers" EntityType="Self.RoleUser" />
+    <EntitySet Name="UserViews" EntityType="Self.UserView" />
+    <AssociationSet Name="FK_Material_Distributor" Association="Self.FK_Material_Distributor">
+      <End Role="Member" EntitySet="Members" />
+      <End Role="Material" EntitySet="Materials" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Recipe_Material" Association="Self.FK_Recipe_Material">
+      <End Role="Material" EntitySet="Materials" />
+      <End Role="Recipe" EntitySet="Recipes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_RoleUser" Association="Self.FK_User_RoleUser">
+      <End Role="RoleUser" EntitySet="RoleUsers" />
+      <End Role="Member" EntitySet="Members" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Recipe_Menu" Association="Self.FK_Recipe_Menu">
+      <End Role="Menu" EntitySet="Menus" />
+      <End Role="Recipe" EntitySet="Recipes" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

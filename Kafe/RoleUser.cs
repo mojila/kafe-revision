@@ -12,20 +12,18 @@ namespace Kafe
     using System;
     using System.Collections.Generic;
     
-    public partial class Distributor
+    public partial class RoleUser
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Distributor()
+        public RoleUser()
         {
-            this.Material = new HashSet<Material>();
+            this.Members = new HashSet<Member>();
         }
     
         public int Id { get; set; }
         public string name { get; set; }
-        public string address { get; set; }
-        public string phone { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Material> Material { get; set; }
+        public virtual ICollection<Member> Members { get; set; }
     }
 }

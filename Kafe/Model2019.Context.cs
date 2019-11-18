@@ -13,10 +13,10 @@ namespace Kafe
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Database2019Entities : DbContext
+    public partial class Database2019EntitiesRevision : DbContext
     {
-        public Database2019Entities()
-            : base("name=Database2019Entities")
+        public Database2019EntitiesRevision()
+            : base("name=Database2019EntitiesRevision")
         {
         }
     
@@ -25,12 +25,11 @@ namespace Kafe
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<role> role { get; set; }
-        public virtual DbSet<user> user { get; set; }
-        public virtual DbSet<Distributor> Distributor { get; set; }
-        public virtual DbSet<Material> Material { get; set; }
-        public virtual DbSet<Menu> Menu { get; set; }
-        public virtual DbSet<Recipe> Recipe { get; set; }
-        public virtual DbSet<UserView> UserView { get; set; }
+        public virtual DbSet<Material> Materials { get; set; }
+        public virtual DbSet<Member> Members { get; set; }
+        public virtual DbSet<Menu> Menus { get; set; }
+        public virtual DbSet<Recipe> Recipes { get; set; }
+        public virtual DbSet<RoleUser> RoleUsers { get; set; }
+        public virtual DbSet<UserView> UserViews { get; set; }
     }
 }

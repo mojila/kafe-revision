@@ -1,32 +1,64 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="Database2019ModelStoreContainer" CdmEntityContainer="Database2019Entities">
-    <EntitySetMapping Name="role">
-      <EntityTypeMapping TypeName="Database2019Model.role">
-        <MappingFragment StoreEntitySet="role">
+  <EntityContainerMapping StorageEntityContainer="Database2019ModelStoreContainer" CdmEntityContainer="Database2019EntitiesRevision">
+    <EntitySetMapping Name="Materials">
+      <EntityTypeMapping TypeName="Database2019Model.Material">
+        <MappingFragment StoreEntitySet="Material">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="role_name" ColumnName="role_name" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="stock" ColumnName="stock" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="distributor" ColumnName="distributor" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="user">
-      <EntityTypeMapping TypeName="Database2019Model.user">
-        <MappingFragment StoreEntitySet="user">
+    <EntitySetMapping Name="Members">
+      <EntityTypeMapping TypeName="Database2019Model.Member">
+        <MappingFragment StoreEntitySet="Member">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="join_date" ColumnName="join_date" />
           <ScalarProperty Name="username" ColumnName="username" />
           <ScalarProperty Name="password" ColumnName="password" />
           <ScalarProperty Name="role" ColumnName="role" />
-          <ScalarProperty Name="join_date" ColumnName="join_date" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="user_view">
-      <EntityTypeMapping TypeName="Database2019Model.user_view">
-        <MappingFragment StoreEntitySet="user_view">
+    <EntitySetMapping Name="Menus">
+      <EntityTypeMapping TypeName="Database2019Model.Menu">
+        <MappingFragment StoreEntitySet="Menu">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="role_name" ColumnName="role_name" />
+          <ScalarProperty Name="price" ColumnName="price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Recipes">
+      <EntityTypeMapping TypeName="Database2019Model.Recipe">
+        <MappingFragment StoreEntitySet="Recipe">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="menu" ColumnName="menu" />
+          <ScalarProperty Name="material" ColumnName="material" />
+          <ScalarProperty Name="material_consume" ColumnName="material_consume" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RoleUsers">
+      <EntityTypeMapping TypeName="Database2019Model.RoleUser">
+        <MappingFragment StoreEntitySet="RoleUser">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserViews">
+      <EntityTypeMapping TypeName="Database2019Model.UserView">
+        <MappingFragment StoreEntitySet="UserView">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="role" ColumnName="role" />
           <ScalarProperty Name="join_date" ColumnName="join_date" />
         </MappingFragment>
       </EntityTypeMapping>

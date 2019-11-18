@@ -16,7 +16,7 @@ namespace Kafe
     {
         public int Id { get; set; }
         public string name { get; set; }
-        public string role_name { get; set; }
+        public string role { get; set; }
         public Nullable<System.DateTime> join_date { get; set; }
     }
 }

@@ -1,18 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Kafe
 {
     public partial class Form1 : Form
     {
-        private user_view loginnedUser;
+        private UserView loginnedUser;
         public Form1()
         {
             InitializeComponent();
@@ -45,7 +38,7 @@ namespace Kafe
                 var result = login.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    loginnedUser = login.user_view;
+                    loginnedUser = login.userView;
 
                     label1.Text = loginnedUser.name;
                     showAll();

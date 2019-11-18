@@ -75,9 +75,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Database2019DataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Distributor.cs">
-      <DependentUpon>Model2019.tt</DependentUpon>
-    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -93,11 +90,11 @@
     <Compile Include="Material.cs">
       <DependentUpon>Model2019.tt</DependentUpon>
     </Compile>
-    <Compile Include="Menu.cs">
+    <Compile Include="Member.cs">
       <DependentUpon>Model2019.tt</DependentUpon>
     </Compile>
-    <Compile Include="Menu.Designer.cs">
-      <DependentUpon>Menu.cs</DependentUpon>
+    <Compile Include="Menu.cs">
+      <DependentUpon>Model2019.tt</DependentUpon>
     </Compile>
     <Compile Include="Model2019.Context.cs">
       <AutoGen>True</AutoGen>
@@ -119,10 +116,7 @@
     <Compile Include="Recipe.cs">
       <DependentUpon>Model2019.tt</DependentUpon>
     </Compile>
-    <Compile Include="role.cs">
-      <DependentUpon>Model2019.tt</DependentUpon>
-    </Compile>
-    <Compile Include="user.cs">
+    <Compile Include="RoleUser.cs">
       <DependentUpon>Model2019.tt</DependentUpon>
     </Compile>
     <Compile Include="UserView.cs">
@@ -133,9 +127,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Menu.resx">
-      <DependentUpon>Menu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -188,8 +179,8 @@
     </Content>
     <Content Include="Model2019.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Model2019.Context.cs</LastGenOutput>
       <DependentUpon>Model2019.edmx</DependentUpon>
+      <LastGenOutput>Model2019.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Model2019.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

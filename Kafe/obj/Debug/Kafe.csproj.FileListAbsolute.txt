@@ -8,7 +8,6 @@ C:\Users\Mojia\source\repos\Kafe\Kafe\obj\Debug\Kafe.exe
 C:\Users\Mojia\source\repos\Kafe\Kafe\obj\Debug\Kafe.pdb
 C:\Users\Mojia\source\repos\Kafe\Kafe\obj\Debug\Kafe.Form1.resources
 C:\Users\Mojia\source\repos\Kafe\Kafe\obj\Debug\Kafe.Login.resources
-C:\Users\Mojia\source\repos\Kafe\Kafe\obj\Debug\Kafe.Menu.resources
 C:\Users\Mojia\source\repos\Kafe\Kafe\bin\Debug\Database2019.mdf
 C:\Users\Mojia\source\repos\Kafe\Kafe\bin\Debug\Database2019_log.ldf
 C:\Users\Mojia\source\repos\Kafe\Kafe\bin\Debug\EntityFramework.dll
