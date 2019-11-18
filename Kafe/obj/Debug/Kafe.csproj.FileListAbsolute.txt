@@ -15,3 +15,4 @@ C:\Users\Mojia\source\repos\Kafe\Kafe\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\Mojia\source\repos\Kafe\Kafe\bin\Debug\EntityFramework.xml
 C:\Users\Mojia\source\repos\Kafe\Kafe\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\Mojia\source\repos\Kafe\Kafe\obj\Debug\Kafe.csproj.CopyComplete
+C:\Users\Mojia\source\repos\Kafe\Kafe\obj\Debug\Kafe.AddToBill.resources

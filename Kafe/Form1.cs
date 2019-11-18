@@ -16,6 +16,7 @@ namespace Kafe
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            // belum perlu login
             //hideAll();
             //showLogin();
             loadMenu();
@@ -91,6 +92,9 @@ namespace Kafe
             try
             {
                 selected = Convert.ToInt32(dataGridView1.SelectedCells[0].Value);
+
+                AddToBill form = new AddToBill(selected);
+                form.Show();
             } catch (Exception _e)
             {
                 MessageBox.Show("No Selected Item.");

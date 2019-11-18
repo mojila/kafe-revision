@@ -70,6 +70,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddToBill.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddToBill.Designer.cs">
+      <DependentUpon>AddToBill.cs</DependentUpon>
+    </Compile>
     <Compile Include="Database2019DataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -125,6 +131,9 @@
     <Compile Include="UserView.cs">
       <DependentUpon>Model2019.tt</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AddToBill.resx">
+      <DependentUpon>AddToBill.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
