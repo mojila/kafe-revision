@@ -125,6 +125,7 @@
     <Compile Include="Recipe.cs">
       <DependentUpon>Model2019.tt</DependentUpon>
     </Compile>
+    <Compile Include="RecipeObject.cs" />
     <Compile Include="RoleUser.cs">
       <DependentUpon>Model2019.tt</DependentUpon>
     </Compile>

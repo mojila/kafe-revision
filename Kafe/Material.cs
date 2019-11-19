@@ -22,7 +22,7 @@ namespace Kafe
     
         public int Id { get; set; }
         public string name { get; set; }
-        public string stock { get; set; }
+        public Nullable<int> stock { get; set; }
         public Nullable<int> price { get; set; }
         public Nullable<int> distributor { get; set; }
     

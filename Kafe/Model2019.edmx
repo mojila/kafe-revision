@@ -11,7 +11,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="varchar" MaxLength="50" />
-          <Property Name="stock" Type="varchar" MaxLength="50" />
+          <Property Name="stock" Type="int" />
           <Property Name="price" Type="int" />
           <Property Name="distributor" Type="int" />
         </EntityType>
@@ -163,17 +163,42 @@ warning 6002: The table/view 'C:\USERS\MOJIA\SOURCE\REPOS\KAFE\KAFE\DATABASE2019
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Database2019Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Database2019EntitiesRevision" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Materials" EntityType="Database2019Model.Material" />
+          <EntitySet Name="Members" EntityType="Database2019Model.Member" />
+          <EntitySet Name="Menus" EntityType="Database2019Model.Menu" />
+          <EntitySet Name="Recipes" EntityType="Database2019Model.Recipe" />
+          <EntitySet Name="RoleUsers" EntityType="Database2019Model.RoleUser" />
+          <EntitySet Name="MenuViews" EntityType="Database2019Model.MenuView" />
+          <EntitySet Name="UserViews" EntityType="Database2019Model.UserView" />
+          <AssociationSet Name="FK_Material_Distributor" Association="Database2019Model.FK_Material_Distributor">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="Material" EntitySet="Materials" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recipe_Material" Association="Database2019Model.FK_Recipe_Material">
+            <End Role="Material" EntitySet="Materials" />
+            <End Role="Recipe" EntitySet="Recipes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_RoleUser" Association="Database2019Model.FK_User_RoleUser">
+            <End Role="RoleUser" EntitySet="RoleUsers" />
+            <End Role="Member" EntitySet="Members" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recipe_Menu" Association="Database2019Model.FK_Recipe_Menu">
+            <End Role="Menu" EntitySet="Menus" />
+            <End Role="Recipe" EntitySet="Recipes" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Material">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="stock" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="stock" Type="Int32" />
           <Property Name="price" Type="Int32" />
           <Property Name="distributor" Type="Int32" />
-          <NavigationProperty Name="Member" Relationship="Self.FK_Material_Distributor" FromRole="Material" ToRole="Member" />
-          <NavigationProperty Name="Recipes" Relationship="Self.FK_Recipe_Material" FromRole="Material" ToRole="Recipe" />
+          <NavigationProperty Name="Member" Relationship="Database2019Model.FK_Material_Distributor" FromRole="Material" ToRole="Member" />
+          <NavigationProperty Name="Recipes" Relationship="Database2019Model.FK_Recipe_Material" FromRole="Material" ToRole="Recipe" />
         </EntityType>
         <EntityType Name="Member">
           <Key>
@@ -187,8 +212,8 @@ warning 6002: The table/view 'C:\USERS\MOJIA\SOURCE\REPOS\KAFE\KAFE\DATABASE2019
           <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="role" Type="Int32" />
-          <NavigationProperty Name="Materials" Relationship="Self.FK_Material_Distributor" FromRole="Member" ToRole="Material" />
-          <NavigationProperty Name="RoleUser" Relationship="Self.FK_User_RoleUser" FromRole="Member" ToRole="RoleUser" />
+          <NavigationProperty Name="Materials" Relationship="Database2019Model.FK_Material_Distributor" FromRole="Member" ToRole="Material" />
+          <NavigationProperty Name="RoleUser" Relationship="Database2019Model.FK_User_RoleUser" FromRole="Member" ToRole="RoleUser" />
         </EntityType>
         <EntityType Name="Menu">
           <Key>
@@ -197,7 +222,7 @@ warning 6002: The table/view 'C:\USERS\MOJIA\SOURCE\REPOS\KAFE\KAFE\DATABASE2019
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="price" Type="Int32" />
-          <NavigationProperty Name="Recipes" Relationship="Self.FK_Recipe_Menu" FromRole="Menu" ToRole="Recipe" />
+          <NavigationProperty Name="Recipes" Relationship="Database2019Model.FK_Recipe_Menu" FromRole="Menu" ToRole="Recipe" />
         </EntityType>
         <EntityType Name="Recipe">
           <Key>
@@ -207,8 +232,8 @@ warning 6002: The table/view 'C:\USERS\MOJIA\SOURCE\REPOS\KAFE\KAFE\DATABASE2019
           <Property Name="menu" Type="Int32" />
           <Property Name="material" Type="Int32" />
           <Property Name="material_consume" Type="Int32" />
-          <NavigationProperty Name="Material1" Relationship="Self.FK_Recipe_Material" FromRole="Recipe" ToRole="Material" />
-          <NavigationProperty Name="Menu1" Relationship="Self.FK_Recipe_Menu" FromRole="Recipe" ToRole="Menu" />
+          <NavigationProperty Name="Material1" Relationship="Database2019Model.FK_Recipe_Material" FromRole="Recipe" ToRole="Material" />
+          <NavigationProperty Name="Menu1" Relationship="Database2019Model.FK_Recipe_Menu" FromRole="Recipe" ToRole="Menu" />
         </EntityType>
         <EntityType Name="RoleUser">
           <Key>
@@ -216,7 +241,15 @@ warning 6002: The table/view 'C:\USERS\MOJIA\SOURCE\REPOS\KAFE\KAFE\DATABASE2019
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Members" Relationship="Self.FK_User_RoleUser" FromRole="RoleUser" ToRole="Member" />
+          <NavigationProperty Name="Members" Relationship="Database2019Model.FK_User_RoleUser" FromRole="RoleUser" ToRole="Member" />
+        </EntityType>
+        <EntityType Name="MenuView">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="price" Type="Int32" />
         </EntityType>
         <EntityType Name="UserView">
           <Key>
@@ -228,8 +261,8 @@ warning 6002: The table/view 'C:\USERS\MOJIA\SOURCE\REPOS\KAFE\KAFE\DATABASE2019
           <Property Name="join_date" Type="DateTime" Precision="0" />
         </EntityType>
         <Association Name="FK_Material_Distributor">
-          <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
-          <End Role="Material" Type="Self.Material" Multiplicity="*" />
+          <End Type="Database2019Model.Member" Role="Member" Multiplicity="0..1" />
+          <End Type="Database2019Model.Material" Role="Material" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Member">
               <PropertyRef Name="Id" />
@@ -240,8 +273,8 @@ warning 6002: The table/view 'C:\USERS\MOJIA\SOURCE\REPOS\KAFE\KAFE\DATABASE2019
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Recipe_Material">
-          <End Role="Material" Type="Self.Material" Multiplicity="0..1" />
-          <End Role="Recipe" Type="Self.Recipe" Multiplicity="*" />
+          <End Type="Database2019Model.Material" Role="Material" Multiplicity="0..1" />
+          <End Type="Database2019Model.Recipe" Role="Recipe" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Material">
               <PropertyRef Name="Id" />
@@ -252,8 +285,8 @@ warning 6002: The table/view 'C:\USERS\MOJIA\SOURCE\REPOS\KAFE\KAFE\DATABASE2019
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_User_RoleUser">
-          <End Role="RoleUser" Type="Self.RoleUser" Multiplicity="0..1" />
-          <End Role="Member" Type="Self.Member" Multiplicity="*" />
+          <End Type="Database2019Model.RoleUser" Role="RoleUser" Multiplicity="0..1" />
+          <End Type="Database2019Model.Member" Role="Member" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="RoleUser">
               <PropertyRef Name="Id" />
@@ -264,8 +297,8 @@ warning 6002: The table/view 'C:\USERS\MOJIA\SOURCE\REPOS\KAFE\KAFE\DATABASE2019
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Recipe_Menu">
-          <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
-          <End Role="Recipe" Type="Self.Recipe" Multiplicity="*" />
+          <End Type="Database2019Model.Menu" Role="Menu" Multiplicity="0..1" />
+          <End Type="Database2019Model.Recipe" Role="Recipe" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Menu">
               <PropertyRef Name="Id" />
@@ -275,40 +308,7 @@ warning 6002: The table/view 'C:\USERS\MOJIA\SOURCE\REPOS\KAFE\KAFE\DATABASE2019
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Database2019EntitiesRevision" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Materials" EntityType="Self.Material" />
-          <EntitySet Name="Members" EntityType="Self.Member" />
-          <EntitySet Name="Menus" EntityType="Self.Menu" />
-          <EntitySet Name="Recipes" EntityType="Self.Recipe" />
-          <EntitySet Name="RoleUsers" EntityType="Self.RoleUser" />
-          <EntitySet Name="UserViews" EntityType="Self.UserView" />
-          <AssociationSet Name="FK_Material_Distributor" Association="Self.FK_Material_Distributor">
-            <End Role="Member" EntitySet="Members" />
-            <End Role="Material" EntitySet="Materials" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Recipe_Material" Association="Self.FK_Recipe_Material">
-            <End Role="Material" EntitySet="Materials" />
-            <End Role="Recipe" EntitySet="Recipes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_RoleUser" Association="Self.FK_User_RoleUser">
-            <End Role="RoleUser" EntitySet="RoleUsers" />
-            <End Role="Member" EntitySet="Members" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Recipe_Menu" Association="Self.FK_Recipe_Menu">
-            <End Role="Menu" EntitySet="Menus" />
-            <End Role="Recipe" EntitySet="Recipes" />
-          </AssociationSet>
-          <EntitySet Name="MenuViews" EntityType="Database2019Model.MenuView" />
-        </EntityContainer>
-        <EntityType Name="MenuView">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="price" Type="Int32" />
-        </EntityType>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -317,62 +317,52 @@ warning 6002: The table/view 'C:\USERS\MOJIA\SOURCE\REPOS\KAFE\KAFE\DATABASE2019
           <EntitySetMapping Name="Materials">
             <EntityTypeMapping TypeName="Database2019Model.Material">
               <MappingFragment StoreEntitySet="Material">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="stock" ColumnName="stock" />
-                <ScalarProperty Name="price" ColumnName="price" />
                 <ScalarProperty Name="distributor" ColumnName="distributor" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="stock" ColumnName="stock" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Members">
             <EntityTypeMapping TypeName="Database2019Model.Member">
               <MappingFragment StoreEntitySet="Member">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="address" ColumnName="address" />
-                <ScalarProperty Name="phone" ColumnName="phone" />
-                <ScalarProperty Name="join_date" ColumnName="join_date" />
-                <ScalarProperty Name="username" ColumnName="username" />
-                <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="join_date" ColumnName="join_date" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Menus">
             <EntityTypeMapping TypeName="Database2019Model.Menu">
               <MappingFragment StoreEntitySet="Menu">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Recipes">
             <EntityTypeMapping TypeName="Database2019Model.Recipe">
               <MappingFragment StoreEntitySet="Recipe">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="menu" ColumnName="menu" />
-                <ScalarProperty Name="material" ColumnName="material" />
                 <ScalarProperty Name="material_consume" ColumnName="material_consume" />
+                <ScalarProperty Name="material" ColumnName="material" />
+                <ScalarProperty Name="menu" ColumnName="menu" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RoleUsers">
             <EntityTypeMapping TypeName="Database2019Model.RoleUser">
               <MappingFragment StoreEntitySet="RoleUser">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="name" ColumnName="name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserViews">
-            <EntityTypeMapping TypeName="Database2019Model.UserView">
-              <MappingFragment StoreEntitySet="UserView">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="role" ColumnName="role" />
-                <ScalarProperty Name="join_date" ColumnName="join_date" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -380,6 +370,16 @@ warning 6002: The table/view 'C:\USERS\MOJIA\SOURCE\REPOS\KAFE\KAFE\DATABASE2019
             <EntityTypeMapping TypeName="Database2019Model.MenuView">
               <MappingFragment StoreEntitySet="MenuView">
                 <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserViews">
+            <EntityTypeMapping TypeName="Database2019Model.UserView">
+              <MappingFragment StoreEntitySet="UserView">
+                <ScalarProperty Name="join_date" ColumnName="join_date" />
+                <ScalarProperty Name="role" ColumnName="role" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

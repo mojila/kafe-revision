@@ -30,8 +30,12 @@ namespace Kafe
         {
             using (Database2019EntitiesRevision database = new Database2019EntitiesRevision())
             {
-                List<Recipe> recipes = database.Recipes.ToList<Recipe>();
-                dataGridView1.DataSource = recipes;
+                List<Recipe> recipes = database.Recipes.Where(d => d.menu == selectedMenu).ToList<Recipe>();
+                List<RecipeObject> recipeObjects = new List<RecipeObject>();
+
+                recipes.ForEach(d => {
+                    listBox1.Items.Add(d.Material1.name + " (Need " + d.material_consume + " from " + d.Material1.stock + ") " + (d.Material1.stock >= d.material_consume ? "Enought Material" : "Not Enought Material Stock"));
+                });
             }
         }
 

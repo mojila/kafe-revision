@@ -5,17 +5,17 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="30270f12ab424159aa7ec630a2891539" Name="Diagram1">
-        <EntityTypeShape EntityType="Database2019Model.Material" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Database2019Model.Member" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="Database2019Model.Menu" Width="1.5" PointX="5.25" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Database2019Model.Recipe" Width="1.5" PointX="7.5" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Database2019Model.RoleUser" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Database2019Model.UserView" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
-        <AssociationConnector Association="Database2019Model.FK_Material_Distributor" ManuallyRouted="false" />
-        <AssociationConnector Association="Database2019Model.FK_Recipe_Material" ManuallyRouted="false" />
-        <AssociationConnector Association="Database2019Model.FK_User_RoleUser" ManuallyRouted="false" />
-        <AssociationConnector Association="Database2019Model.FK_Recipe_Menu" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="Database2019Model.MenuView" Width="1.5" PointX="2.875" PointY="4.875" />
+        <EntityTypeShape EntityType="Database2019Model.Material" Width="1.5" PointX="5.25" PointY="1.25" />
+        <EntityTypeShape EntityType="Database2019Model.Member" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="Database2019Model.Menu" Width="1.5" PointX="5.25" PointY="5.5" />
+        <EntityTypeShape EntityType="Database2019Model.Recipe" Width="1.5" PointX="7.5" PointY="1.375" />
+        <EntityTypeShape EntityType="Database2019Model.RoleUser" Width="1.5" PointX="0.75" PointY="1.625" />
+        <EntityTypeShape EntityType="Database2019Model.MenuView" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="Database2019Model.UserView" Width="1.5" PointX="0.75" PointY="7.75" />
+        <AssociationConnector Association="Database2019Model.FK_Material_Distributor" />
+        <AssociationConnector Association="Database2019Model.FK_Recipe_Material" />
+        <AssociationConnector Association="Database2019Model.FK_User_RoleUser" />
+        <AssociationConnector Association="Database2019Model.FK_Recipe_Menu" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
