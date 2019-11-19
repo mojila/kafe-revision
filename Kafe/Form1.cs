@@ -10,6 +10,7 @@ namespace Kafe
     {
         private UserView loginnedUser;
         private List<BillItem> billItems = new List<BillItem>();
+        private List<string> list = new List<string>();
 
         public Form1()
         {
@@ -22,7 +23,6 @@ namespace Kafe
             //hideAll();
             //showLogin();
             loadMenu();
-            initBill();
         }
 
         private List<MenuView> searchMenu(string keyword)
@@ -89,22 +89,44 @@ namespace Kafe
 
         }
 
-        private void initBill()
+        private void refreshBill(BillItem newItem = null)
         {
-            dataGridView2.AutoGenerateColumns = false;
-            dataGridView2.AllowUserToAddRows = false;
-            refreshBill();
+            try
+            {
+                dataGridView2.DataSource = null;
+                int totalBill = 0;
 
-            DataGridViewTextBoxColumn column1 = new DataGridViewTextBoxColumn();
-            column1.Name = "name";
-            column1.HeaderText = "Name";
-            column1.DataPropertyName = "menu.name";
-            dataGridView2.Columns.Add(column1);
-        }
+                if (newItem != null)
+                {
+                    int billIndex = billItems.FindIndex(d => d.id == newItem.id);
+                    if (billIndex != -1)
+                    {
+                        billItems[billIndex].quantity += newItem.quantity;
+                    }
+                    else
+                    {
+                        billItems.Add(newItem);
+                    }
+                }
 
-        private void refreshBill()
-        {
-            dataGridView2.DataSource = billItems;
+                billItems.ForEach(d => {
+                    totalBill += d.price * d.quantity;
+                });
+
+                dataGridView2.DataSource = billItems;
+                textBox2.Text = totalBill.ToString();
+                
+                if (billItems.Count > 0)
+                {
+                    button1.Enabled = true;
+                } else
+                {
+                    button1.Enabled = false;
+                }
+            } catch
+            {
+                MessageBox.Show("Error");
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -123,13 +145,12 @@ namespace Kafe
                         {
                             Menu menu = database.Menus.Where(d => d.Id == selected).FirstOrDefault<Menu>();
                             BillItem newBill = new BillItem();
-                            newBill.menu = menu;
+                            newBill.id = menu.Id;
+                            newBill.name = menu.name;
                             newBill.quantity = form.quantity;
+                            newBill.price = Convert.ToInt32(menu.price);
 
-                            billItems.Add(newBill);
-
-                            refreshBill();
-                            MessageBox.Show(newBill.menu.name);
+                            refreshBill(newBill);
                         }
                     }
                 }
@@ -137,6 +158,16 @@ namespace Kafe
             {
                 MessageBox.Show("No Selected Item.");
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            button2.Enabled = true;
         }
     }
 }
