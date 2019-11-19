@@ -121,6 +121,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model2019.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Order.cs">
+      <DependentUpon>Model2019.tt</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Recipe.cs">

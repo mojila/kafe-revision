@@ -36,6 +36,18 @@
           <Property Name="name" Type="varchar" MaxLength="50" />
           <Property Name="price" Type="int" />
         </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date" Type="date" />
+          <Property Name="member" Type="int" />
+          <Property Name="total" Type="int" />
+          <Property Name="status" Type="tinyint" />
+          <Property Name="comment" Type="varchar" MaxLength="50" />
+          <Property Name="cashier" Type="int" />
+        </EntityType>
         <EntityType Name="Recipe">
           <Key>
             <PropertyRef Name="Id" />
@@ -109,6 +121,30 @@ warning 6002: The table/view 'C:\USERS\MOJIA\SOURCE\REPOS\KAFE\KAFE\DATABASE2019
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Table_Cashier">
+          <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="cashier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_Member">
+          <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="member" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_User_RoleUser">
           <End Role="RoleUser" Type="Self.RoleUser" Multiplicity="0..1" />
           <End Role="Member" Type="Self.Member" Multiplicity="*" />
@@ -125,6 +161,7 @@ warning 6002: The table/view 'C:\USERS\MOJIA\SOURCE\REPOS\KAFE\KAFE\DATABASE2019
           <EntitySet Name="Material" EntityType="Self.Material" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Member" EntityType="Self.Member" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Recipe" EntityType="Self.Recipe" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RoleUser" EntityType="Self.RoleUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MenuView" EntityType="Self.MenuView" store:Type="Views" store:Schema="dbo">
@@ -153,6 +190,14 @@ warning 6002: The table/view 'C:\USERS\MOJIA\SOURCE\REPOS\KAFE\KAFE\DATABASE2019
           <AssociationSet Name="FK_Recipe_Menu" Association="Self.FK_Recipe_Menu">
             <End Role="Menu" EntitySet="Menu" />
             <End Role="Recipe" EntitySet="Recipe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_Cashier" Association="Self.FK_Table_Cashier">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_Member" Association="Self.FK_Table_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Order" EntitySet="Order" />
           </AssociationSet>
           <AssociationSet Name="FK_User_RoleUser" Association="Self.FK_User_RoleUser">
             <End Role="RoleUser" EntitySet="RoleUser" />
@@ -187,6 +232,15 @@ warning 6002: The table/view 'C:\USERS\MOJIA\SOURCE\REPOS\KAFE\KAFE\DATABASE2019
             <End Role="Menu" EntitySet="Menus" />
             <End Role="Recipe" EntitySet="Recipes" />
           </AssociationSet>
+          <EntitySet Name="Orders" EntityType="Database2019Model.Order" />
+          <AssociationSet Name="FK_Table_Cashier" Association="Database2019Model.FK_Table_Cashier">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_Member" Association="Database2019Model.FK_Table_Member">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Material">
           <Key>
@@ -214,6 +268,8 @@ warning 6002: The table/view 'C:\USERS\MOJIA\SOURCE\REPOS\KAFE\KAFE\DATABASE2019
           <Property Name="role" Type="Int32" />
           <NavigationProperty Name="Materials" Relationship="Database2019Model.FK_Material_Distributor" FromRole="Member" ToRole="Material" />
           <NavigationProperty Name="RoleUser" Relationship="Database2019Model.FK_User_RoleUser" FromRole="Member" ToRole="RoleUser" />
+          <NavigationProperty Name="Orders" Relationship="Database2019Model.FK_Table_Cashier" FromRole="Member" ToRole="Order" />
+          <NavigationProperty Name="Orders1" Relationship="Database2019Model.FK_Table_Member" FromRole="Member" ToRole="Order" />
         </EntityType>
         <EntityType Name="Menu">
           <Key>
@@ -308,6 +364,44 @@ warning 6002: The table/view 'C:\USERS\MOJIA\SOURCE\REPOS\KAFE\KAFE\DATABASE2019
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" Precision="0" />
+          <Property Name="member" Type="Int32" />
+          <Property Name="total" Type="Int32" />
+          <Property Name="status" Type="Byte" />
+          <Property Name="comment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cashier" Type="Int32" />
+          <NavigationProperty Name="Member1" Relationship="Database2019Model.FK_Table_Cashier" FromRole="Order" ToRole="Member" />
+          <NavigationProperty Name="Member2" Relationship="Database2019Model.FK_Table_Member" FromRole="Order" ToRole="Member" />
+        </EntityType>
+        <Association Name="FK_Table_Cashier">
+          <End Type="Database2019Model.Member" Role="Member" Multiplicity="0..1" />
+          <End Type="Database2019Model.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="cashier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_Member">
+          <End Type="Database2019Model.Member" Role="Member" Multiplicity="0..1" />
+          <End Type="Database2019Model.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="member" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -381,6 +475,19 @@ warning 6002: The table/view 'C:\USERS\MOJIA\SOURCE\REPOS\KAFE\KAFE\DATABASE2019
                 <ScalarProperty Name="join_date" ColumnName="join_date" />
                 <ScalarProperty Name="role" ColumnName="role" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="Database2019Model.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="cashier" ColumnName="cashier" />
+                <ScalarProperty Name="comment" ColumnName="comment" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="member" ColumnName="member" />
+                <ScalarProperty Name="date" ColumnName="date" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

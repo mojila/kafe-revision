@@ -16,6 +16,9 @@
         <AssociationConnector Association="Database2019Model.FK_Recipe_Material" />
         <AssociationConnector Association="Database2019Model.FK_User_RoleUser" />
         <AssociationConnector Association="Database2019Model.FK_Recipe_Menu" />
+        <EntityTypeShape EntityType="Database2019Model.Order" Width="1.5" PointX="5.25" PointY="8.25" />
+        <AssociationConnector Association="Database2019Model.FK_Table_Cashier" />
+        <AssociationConnector Association="Database2019Model.FK_Table_Member" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
