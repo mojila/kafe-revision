@@ -95,7 +95,7 @@ namespace Kafe
 
                 AddToBill form = new AddToBill(selected);
                 form.Show();
-            } catch (Exception _e)
+            } catch
             {
                 MessageBox.Show("No Selected Item.");
             }

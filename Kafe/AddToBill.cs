@@ -23,7 +23,16 @@ namespace Kafe
 
         private void AddToBill_Load(object sender, EventArgs e)
         {
+            loadRecipe();
+        }
 
+        private void loadRecipe()
+        {
+            using (Database2019EntitiesRevision database = new Database2019EntitiesRevision())
+            {
+                List<Recipe> recipes = database.Recipes.ToList<Recipe>();
+                dataGridView1.DataSource = recipes;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
