@@ -9,6 +9,8 @@ namespace Kafe
     public partial class Form1 : Form
     {
         private UserView loginnedUser;
+        private List<BillItem> billItems = new List<BillItem>();
+
         public Form1()
         {
             InitializeComponent();
@@ -20,6 +22,7 @@ namespace Kafe
             //hideAll();
             //showLogin();
             loadMenu();
+            initBill();
         }
 
         private List<MenuView> searchMenu(string keyword)
@@ -60,6 +63,7 @@ namespace Kafe
             using (Login login = new Login())
             {
                 var result = login.ShowDialog();
+
                 if (result == DialogResult.OK)
                 {
                     loginnedUser = login.userView;
@@ -85,16 +89,50 @@ namespace Kafe
 
         }
 
+        private void initBill()
+        {
+            dataGridView2.AutoGenerateColumns = false;
+            dataGridView2.AllowUserToAddRows = false;
+            refreshBill();
+
+            DataGridViewTextBoxColumn column1 = new DataGridViewTextBoxColumn();
+            column1.Name = "name";
+            column1.HeaderText = "Name";
+            column1.DataPropertyName = "menu.name";
+            dataGridView2.Columns.Add(column1);
+        }
+
+        private void refreshBill()
+        {
+            dataGridView2.DataSource = billItems;
+        }
+
         private void button4_Click(object sender, EventArgs e)
         {
-            int selected = 0;
-
             try
             {
-                selected = Convert.ToInt32(dataGridView1.SelectedCells[0].Value);
+                int selected = Convert.ToInt32(dataGridView1.SelectedCells[0].Value);
 
-                AddToBill form = new AddToBill(selected);
-                form.Show();
+                using (AddToBill form = new AddToBill(selected))
+                {
+                    var result = form.ShowDialog();
+
+                    if (result == DialogResult.OK)
+                    {
+                        using (Database2019EntitiesRevision database = new Database2019EntitiesRevision())
+                        {
+                            Menu menu = database.Menus.Where(d => d.Id == selected).FirstOrDefault<Menu>();
+                            BillItem newBill = new BillItem();
+                            newBill.menu = menu;
+                            newBill.quantity = form.quantity;
+
+                            billItems.Add(newBill);
+
+                            refreshBill();
+                            MessageBox.Show(newBill.menu.name);
+                        }
+                    }
+                }
             } catch
             {
                 MessageBox.Show("No Selected Item.");

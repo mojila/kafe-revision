@@ -76,6 +76,7 @@
     <Compile Include="AddToBill.Designer.cs">
       <DependentUpon>AddToBill.cs</DependentUpon>
     </Compile>
+    <Compile Include="BillItem.cs" />
     <Compile Include="Database2019DataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
