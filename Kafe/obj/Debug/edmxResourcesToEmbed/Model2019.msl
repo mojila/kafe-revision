@@ -72,5 +72,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="Database2019Model.Order">
+        <MappingFragment StoreEntitySet="Order">
+          <ScalarProperty Name="cashier" ColumnName="cashier" />
+          <ScalarProperty Name="comment" ColumnName="comment" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="total" ColumnName="total" />
+          <ScalarProperty Name="member" ColumnName="member" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

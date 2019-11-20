@@ -23,6 +23,7 @@ namespace Kafe
             //hideAll();
             //showLogin();
             loadMenu();
+            loginnedUser.Id = 1;
         }
 
         private List<MenuView> searchMenu(string keyword)

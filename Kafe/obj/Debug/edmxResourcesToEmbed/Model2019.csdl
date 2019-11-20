@@ -24,6 +24,15 @@
       <End Role="Menu" EntitySet="Menus" />
       <End Role="Recipe" EntitySet="Recipes" />
     </AssociationSet>
+    <EntitySet Name="Orders" EntityType="Database2019Model.Order" />
+    <AssociationSet Name="FK_Table_Cashier" Association="Database2019Model.FK_Table_Cashier">
+      <End Role="Member" EntitySet="Members" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Table_Member" Association="Database2019Model.FK_Table_Member">
+      <End Role="Member" EntitySet="Members" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Material">
     <Key>
@@ -51,6 +60,8 @@
     <Property Name="role" Type="Int32" />
     <NavigationProperty Name="Materials" Relationship="Database2019Model.FK_Material_Distributor" FromRole="Member" ToRole="Material" />
     <NavigationProperty Name="RoleUser" Relationship="Database2019Model.FK_User_RoleUser" FromRole="Member" ToRole="RoleUser" />
+    <NavigationProperty Name="Orders" Relationship="Database2019Model.FK_Table_Cashier" FromRole="Member" ToRole="Order" />
+    <NavigationProperty Name="Orders1" Relationship="Database2019Model.FK_Table_Member" FromRole="Member" ToRole="Order" />
   </EntityType>
   <EntityType Name="Menu">
     <Key>
@@ -142,6 +153,44 @@
       </Principal>
       <Dependent Role="Recipe">
         <PropertyRef Name="menu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="date" Type="DateTime" Precision="0" />
+    <Property Name="member" Type="Int32" />
+    <Property Name="total" Type="Int32" />
+    <Property Name="status" Type="Byte" />
+    <Property Name="comment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="cashier" Type="Int32" />
+    <NavigationProperty Name="Member1" Relationship="Database2019Model.FK_Table_Cashier" FromRole="Order" ToRole="Member" />
+    <NavigationProperty Name="Member2" Relationship="Database2019Model.FK_Table_Member" FromRole="Order" ToRole="Member" />
+  </EntityType>
+  <Association Name="FK_Table_Cashier">
+    <End Type="Database2019Model.Member" Role="Member" Multiplicity="0..1" />
+    <End Type="Database2019Model.Order" Role="Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="cashier" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Table_Member">
+    <End Type="Database2019Model.Member" Role="Member" Multiplicity="0..1" />
+    <End Type="Database2019Model.Order" Role="Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="member" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
