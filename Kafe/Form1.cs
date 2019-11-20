@@ -23,6 +23,7 @@ namespace Kafe
             //hideAll();
             //showLogin();
             loadMenu();
+            loginnedUser = new UserView();
             loginnedUser.Id = 1;
         }
 
@@ -163,7 +164,36 @@ namespace Kafe
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //createOrder();
+        }
 
+        private void createOrder()
+        {
+            using (Database2019EntitiesRevision database = new Database2019EntitiesRevision())
+            {
+                try
+                {
+                    Order order = new Order();
+                    order.cashier = loginnedUser.Id;
+                    order.member = 2;
+                    order.status = 1;
+                    order.total = 10000;
+                    order.comment = "new order";
+                    order.date = dateTimePicker1.Value;
+
+                    database.Orders.Add(order);
+                    database.SaveChanges();
+
+                    MessageBox.Show("Success!");
+
+                    List<Order> orders = database.Orders.ToList<Order>();
+                    dataGridView3.DataSource = orders;
+                }
+                catch
+                {
+                    MessageBox.Show("Failed!");
+                }
+            }
         }
 
         private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
