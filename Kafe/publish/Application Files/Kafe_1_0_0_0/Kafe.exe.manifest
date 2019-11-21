@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="Kafe.exe" version="1.0.0.0" publicKeyToken="906be977f67e189a" language="neutral" processorArchitecture="msil" type="win32" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="Kafe" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <commandLine file="Kafe.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC Manifest Options
+          If you want to change the Windows User Account Control level replace the
+          requestedExecutionLevel node with one of the following.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+         If you want to utilize File and Registry Virtualization for backward
+         compatibility then delete the requestedExecutionLevel node.
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="EntityFramework.dll" size="5225168">
+      <assemblyIdentity name="EntityFramework" version="6.0.0.0" publicKeyToken="B77A5C561934E089" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>nCD7KthqdgsMauvZMByQCYkdAq4UcgqTkmwLU1uK0Js=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="EntityFramework.SqlServer.dll" size="622288">
+      <assemblyIdentity name="EntityFramework.SqlServer" version="6.0.0.0" publicKeyToken="B77A5C561934E089" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>4OEmw7inupUB0D+Z1Upcu9F0vOy2FwCYq0zBIZ8n+TM=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Kafe.exe" size="116200">
+      <assemblyIdentity name="Kafe" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>pgWcRDb5GEAl0EImJqhRqAFjgD67VsvuEY8PH+ClTi8=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="Database2019.mdf" size="8388608" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>uh1U00FN/t18p+WzsVXNaSIrhiC/sTuIjHidKjsZO+Q=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Database2019_log.ldf" size="8388608" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>eC6hoGYpQ50r9M+gIYzQA3EZlmP15kIwMw7jX2EG10s=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Kafe.exe.config" size="2015">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>HyyS4N+BNydpt3N73Wwu5LHSOxXBPgPbXAj7NBpzHLo=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Model2019.Context.tt" size="22933">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>NNCxI2JLb8NxpM+qCOZnsBtc/42sJeSaLSgwYwxkH2I=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Model2019.tt" size="25278">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>6/Xw7rbN1cEFzvqHYblkUh3ArCs0dCdI8KSKwZD07OI=</dsig:DigestValue>
+    </hash>
+  </file>
+<publisherIdentity name="CN=DESKTOP-04P79FO\Mojila" issuerKeyHash="e546370c83d598dfc7fd8afcf0f50850764dcdff" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>77DPuCRdcDfH+L7yxGLHxuFVuRDZJMBBegLQ2RyyMZ4=</DigestValue></Reference></SignedInfo><SignatureValue>sDKoc8vQmduT3vwlytNxHBIcQEC2MAQB3YAFEF2JGFssdbjH1GNhfCcJoumoz7XisBiCpaxJEZnun8ouW58oMJ6lzRE5gVooAI6b4SCz0UOL03i6lhr8dtERAMGiS36UgHdhLMGVCGSLuLdBzuiOns5HQoQOEmGvRPeHReFlp14=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>5o48LyVxY/zbUOfG921V04aYiMDG9wI+yVhhzV6LMq3ZoD8GmbtisxKiqoQ/b+KJqySlEwG3kqwxgz3Vwn7fYNYnAV7+ixryQKUrDzlpD1Qc/fE2MDYbmhguuUQI+93baG5GqaGOlsuuA6dXnY1nWMcv45FUC6XhDC4pJP/2QdE=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="9e31b21cd9d0027a41c024d910b955e1c6c762c4f2bef8c737705d24b8cfb0ef" Description="" Url=""><as:assemblyIdentity name="Kafe.exe" version="1.0.0.0" publicKeyToken="906be977f67e189a" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=DESKTOP-04P79FO\Mojila</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>gWS1tOOq+03MD3tn/QiYowHP4/GRyp/Ue3QdKKQqTCQ=</DigestValue></Reference></SignedInfo><SignatureValue>zDd9qNRG2Y3AzaXKVuVPwg9n49QgFg5IfmzQuLJf9ZdTWR4UM2hIEOwuCfcDywAB8lAn4o7ZI5jgjvGdHenOEOGttSVJn/0qb777QxYrErLouoHRkw0MLeKHa/ZmzlBH+PCNecBGkzQt553HtnGrXFlqXdt16zHc5wQwl2dWxkU=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>5o48LyVxY/zbUOfG921V04aYiMDG9wI+yVhhzV6LMq3ZoD8GmbtisxKiqoQ/b+KJqySlEwG3kqwxgz3Vwn7fYNYnAV7+ixryQKUrDzlpD1Qc/fE2MDYbmhguuUQI+93baG5GqaGOlsuuA6dXnY1nWMcv45FUC6XhDC4pJP/2QdE=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB8TCCAVqgAwIBAgIQa+3zbQtYHadMUkn+S0YjxzANBgkqhkiG9w0BAQsFADA3MTUwMwYDVQQDHiwARABFAFMASwBUAE8AUAAtADAANABQADcAOQBGAE8AXABNAG8AagBpAGwAYTAeFw0xOTExMjEwNjU5NDdaFw0yMDExMjAxMjU5NDdaMDcxNTAzBgNVBAMeLABEAEUAUwBLAFQATwBQAC0AMAA0AFAANwA5AEYATwBcAE0AbwBqAGkAbABhMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDmjjwvJXFj/NtQ58b3bVXThpiIwMb3Aj7JWGHNXosyrdmgPwaZu2KzEqKqhD9v4omrJKUTAbeSrDGDPdXCft9g1icBXv6LGvJApSsPOWkPVBz98TYwNhuaGC65RAj73dtobkapoY6Wy64Dp1edjWdYxy/jkVQLpeEMLikk//ZB0QIDAQABMA0GCSqGSIb3DQEBCwUAA4GBAKkDonffVC11ky2RkvuAjXRhGt0+P0+0PmI+WPs3uiq1aU2HMkOWfue3EUqfoTvp5RDd9CjXG2ltnn4sx0Jt5+r2BcJGI/PxObO0N7gQdHJKjP7nUy7Y1cy0EGAEJIbtjN19Q/eX+JWdbP2r7mVZa5cRYdgFRaF6QoktAmJM80bF</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>

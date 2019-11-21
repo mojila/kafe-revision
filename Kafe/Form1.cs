@@ -182,6 +182,10 @@ namespace Kafe
         private void button1_Click(object sender, EventArgs e)
         {
             //createOrder();
+            using (AddOrder addOrder = new AddOrder())
+            {
+                addOrder.ShowDialog();
+            }
         }
 
         private void createOrder()

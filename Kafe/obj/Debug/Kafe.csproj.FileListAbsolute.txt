@@ -25,7 +25,6 @@ C:\Users\Mojila\source\repos\kafe-revision\Kafe\bin\Debug\EntityFramework.dll
 C:\Users\Mojila\source\repos\kafe-revision\Kafe\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\Mojila\source\repos\kafe-revision\Kafe\bin\Debug\EntityFramework.xml
 C:\Users\Mojila\source\repos\kafe-revision\Kafe\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\Mojila\source\repos\kafe-revision\Kafe\obj\Debug\Kafe.csprojAssemblyReference.cache
 C:\Users\Mojila\source\repos\kafe-revision\Kafe\obj\Debug\Kafe.AddToBill.resources
 C:\Users\Mojila\source\repos\kafe-revision\Kafe\obj\Debug\Kafe.Form1.resources
 C:\Users\Mojila\source\repos\kafe-revision\Kafe\obj\Debug\Kafe.Login.resources
@@ -34,3 +33,9 @@ C:\Users\Mojila\source\repos\kafe-revision\Kafe\obj\Debug\Kafe.csproj.GenerateRe
 C:\Users\Mojila\source\repos\kafe-revision\Kafe\obj\Debug\Kafe.csproj.CopyComplete
 C:\Users\Mojila\source\repos\kafe-revision\Kafe\obj\Debug\Kafe.exe
 C:\Users\Mojila\source\repos\kafe-revision\Kafe\obj\Debug\Kafe.pdb
+C:\Users\Mojila\source\repos\kafe-revision\Kafe\bin\Debug\Kafe.exe.manifest
+C:\Users\Mojila\source\repos\kafe-revision\Kafe\bin\Debug\Kafe.application
+C:\Users\Mojila\source\repos\kafe-revision\Kafe\obj\Debug\Kafe.exe.manifest
+C:\Users\Mojila\source\repos\kafe-revision\Kafe\obj\Debug\Kafe.application
+C:\Users\Mojila\source\repos\kafe-revision\Kafe\obj\Debug\Kafe.csprojAssemblyReference.cache
+C:\Users\Mojila\source\repos\kafe-revision\Kafe\obj\Debug\Kafe.AddOrder.resources
