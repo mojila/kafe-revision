@@ -117,7 +117,7 @@ namespace Kafe
 
                 dataGridView2.DataSource = billItems;
                 textBox2.Text = totalBill.ToString();
-                
+
                 if (billItems.Count > 0)
                 {
                     button1.Enabled = true;
@@ -133,6 +133,11 @@ namespace Kafe
 
         private void button4_Click(object sender, EventArgs e)
         {
+            addBillItem();
+        }
+
+        private void addBillItem()
+        {
             try
             {
                 int selected = Convert.ToInt32(dataGridView1.SelectedCells[0].Value);
@@ -146,6 +151,17 @@ namespace Kafe
                         using (Database2019EntitiesRevision database = new Database2019EntitiesRevision())
                         {
                             Menu menu = database.Menus.Where(d => d.Id == selected).FirstOrDefault<Menu>();
+                            List<Recipe> recipes = database.Recipes.Where(d => d.Id == menu.Id).ToList<Recipe>();
+
+                            recipes.ForEach(d =>
+                            {
+                                List<Material> materials = database.Materials.Where(da => da.Id == d.material)
+                                    .ToList<Material>();
+                                materials.ForEach(da => da.stock = da.stock - d.material_consume * form.quantity);
+
+                                database.SaveChanges();
+                            });
+
                             BillItem newBill = new BillItem();
                             newBill.id = menu.Id;
                             newBill.name = menu.name;
@@ -156,7 +172,8 @@ namespace Kafe
                         }
                     }
                 }
-            } catch
+            }
+            catch
             {
                 MessageBox.Show("No Selected Item.");
             }
@@ -199,6 +216,35 @@ namespace Kafe
         private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             button2.Enabled = true;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int selectedBillItemId = int.Parse(dataGridView1.SelectedCells[0].Value.ToString());
+                BillItem item = billItems.Where(d => d.id == selectedBillItemId).FirstOrDefault();
+
+                using (Database2019EntitiesRevision database = new Database2019EntitiesRevision())
+                {
+                    List<Recipe> recipes = database.Recipes.Where(d => d.menu == selectedBillItemId).ToList<Recipe>();
+
+                    recipes.ForEach(d =>
+                    {
+                        List<Material> materials = database.Materials.Where(da => da.Id == d.material).ToList<Material>();
+                        materials.ForEach(res => res.stock += d.material_consume * item.quantity);
+
+                        database.SaveChanges();
+                    });
+                }
+
+                billItems.Remove(item);
+                refreshBill();
+                MessageBox.Show("Bill Item Canceled!");
+            } catch
+            {
+                MessageBox.Show("Please select bill item first.");
+            }
         }
     }
 }
