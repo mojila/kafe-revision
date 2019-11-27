@@ -33,6 +33,7 @@
       <End Role="Member" EntitySet="Members" />
       <End Role="Order" EntitySet="Orders" />
     </AssociationSet>
+    <EntitySet Name="OrderItems" EntityType="Database2019Model.OrderItem" />
   </EntityContainer>
   <EntityType Name="Material">
     <Key>
@@ -194,4 +195,13 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="OrderItem">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="menu" Type="Int32" />
+    <Property Name="order" Type="Int32" />
+    <Property Name="quantity" Type="Int32" />
+  </EntityType>
 </Schema>

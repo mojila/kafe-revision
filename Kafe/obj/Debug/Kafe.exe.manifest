@@ -66,14 +66,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Kafe.exe" size="117736">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Kafe.exe" size="123368">
       <assemblyIdentity name="Kafe" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>cGNknmh23z/4Lb0lZT3+Vd5n5eHN4vyQJPsCyM8dCkE=</dsig:DigestValue>
+        <dsig:DigestValue>zYlUhmj755AChJUwP3havMIA8xTU0u5J2QLydUU1vo0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -83,7 +83,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>uh1U00FN/t18p+WzsVXNaSIrhiC/sTuIjHidKjsZO+Q=</dsig:DigestValue>
+      <dsig:DigestValue>wnsgDTPahuRQ4/6OGmSA+xIbUmAExR8h9Q0bGOvxADE=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Database2019_log.ldf" size="8388608" writeableType="applicationData">
@@ -92,7 +92,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>eC6hoGYpQ50r9M+gIYzQA3EZlmP15kIwMw7jX2EG10s=</dsig:DigestValue>
+      <dsig:DigestValue>4vkmx8g4rNRT4KbtUq05E9twkh5pFg21D0lsXUejjpY=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Kafe.exe.config" size="2015">

@@ -9,8 +9,7 @@ namespace Kafe
     public partial class Form1 : Form
     {
         private UserView loginnedUser;
-        private List<BillItem> billItems = new List<BillItem>();
-        private List<string> list = new List<string>();
+        private List<BillItem> billItems;
 
         public Form1()
         {
@@ -19,6 +18,7 @@ namespace Kafe
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            billItems = new List<BillItem>();
             // belum perlu login
             //hideAll();
             //showLogin();
@@ -76,6 +76,22 @@ namespace Kafe
             }
         }
 
+        private void refreshIncome()
+        {
+            using (Database2019EntitiesRevision database = new Database2019EntitiesRevision())
+            {
+                List<Order> orders = database.Orders.ToList<Order>();
+                int total = 0;
+
+                if (orders.Count > 0)
+                {
+                    orders.ForEach(d => total += (int)d.total);
+                }
+
+                label10.Text = total.ToString();
+            }
+        }
+
         private void panel2_Paint(object sender, PaintEventArgs e)
         {
 
@@ -95,27 +111,29 @@ namespace Kafe
         {
             try
             {
-                dataGridView2.DataSource = null;
+                dataGridView4.DataSource = null;
                 int totalBill = 0;
 
                 if (newItem != null)
                 {
-                    int billIndex = billItems.FindIndex(d => d.id == newItem.id);
-                    if (billIndex != -1)
-                    {
-                        billItems[billIndex].quantity += newItem.quantity;
-                    }
-                    else
-                    {
-                        billItems.Add(newItem);
-                    }
+                    //int billIndex = billItems.FindIndex(d => d.id == newItem.id);
+                    //if (billIndex >= 0)
+                    //{
+                    //  billItems[billIndex].quantity += newItem.quantity;
+                    //}
+                    //else
+                    //{
+
+                    //}
+                    billItems.Add(newItem);
                 }
 
                 billItems.ForEach(d => {
                     totalBill += d.price * d.quantity;
                 });
 
-                dataGridView2.DataSource = billItems;
+                dataGridView4.DataSource = billItems;
+                dataGridView4.Refresh();
                 textBox2.Text = totalBill.ToString();
 
                 if (billItems.Count > 0)
@@ -162,13 +180,26 @@ namespace Kafe
                                 database.SaveChanges();
                             });
 
-                            BillItem newBill = new BillItem();
-                            newBill.id = menu.Id;
-                            newBill.name = menu.name;
-                            newBill.quantity = form.quantity;
-                            newBill.price = Convert.ToInt32(menu.price);
+                            int index = billItems.FindIndex(d => d.id == menu.Id);
 
-                            refreshBill(newBill);
+                            if (index == -1)
+                            {
+                                BillItem newBill = new BillItem();
+                                newBill.id = menu.Id;
+                                newBill.name = menu.name;
+                                newBill.quantity = form.quantity;
+                                newBill.price = Convert.ToInt32(menu.price);
+
+                                billItems.Add(newBill);
+                            }
+                            else
+                            {
+                                billItems[index].quantity += form.quantity;
+                                billItems[index].price = billItems[index].quantity * (int) menu.price;
+                            }
+
+
+                            refreshBillFix();
                         }
                     }
                 }
@@ -181,34 +212,115 @@ namespace Kafe
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //createOrder();
-            using (AddOrder addOrder = new AddOrder())
+            int total = int.Parse(textBox2.Text);
+
+            using (AddOrder addOrder = new AddOrder(total))
             {
-                addOrder.ShowDialog();
+                var result = addOrder.ShowDialog();
+                int idCustomer;
+
+                if (result == DialogResult.OK)
+                {
+                    idCustomer = addOrder.idCustomer;
+
+                    Order order = new Order();
+                    order.member = idCustomer;
+                    order.cashier = loginnedUser.Id;
+                    order.status = 0;
+                    order.total = total;
+                    order.comment = "";
+                    order.date = dateTimePicker1.Value;
+
+                    createOrder(order);
+                }
             }
         }
 
-        private void createOrder()
+        private void refreshOrder()
+        {
+            using (Database2019EntitiesRevision database = new Database2019EntitiesRevision())
+            {
+                dataGridView3.DataSource = null;
+
+                List<OrderData> orderDatas = new List<OrderData>();
+                List<Order> orders = database.Orders.Where(d => d.status == 0).ToList<Order>();
+
+                orders.ForEach(d =>
+                {
+                    OrderData orderData = new OrderData();
+                    orderData.id = d.Id;
+
+                    Member member = database.Members.Where(e => e.Id == d.member).FirstOrDefault();
+                    orderData.customerName = member.name;
+                    orderData.date = (DateTime) d.date;
+                    orderData.totalBill = (int) d.total;
+
+                    orderDatas.Add(orderData);
+                });
+
+                dataGridView3.DataSource = orderDatas;
+                refreshIncome();
+            }
+        }
+
+        private void refreshBillFix()
+        {
+            using (Database2019EntitiesRevision database = new Database2019EntitiesRevision())
+            {
+                dataGridView4.DataSource = null;
+                int total = 0;
+
+                List<BillItem> newBills = new List<BillItem>();
+                billItems.ForEach(d =>
+                {
+                    BillItem billItem = new BillItem();
+                    billItem.id = d.id;
+                    billItem.name = d.name;
+                    billItem.quantity = d.quantity;
+                    billItem.price = d.price;
+
+                    newBills.Add(billItem);
+                    total += d.price;
+                });
+
+                dataGridView4.DataSource = newBills;
+                textBox2.Text = total.ToString();
+
+                if (newBills.Count > 0)
+                {
+                    button1.Enabled = true;
+                    button2.Enabled = true;
+                } else
+                {
+                    button1.Enabled = false;
+                    button2.Enabled = true;
+                }
+            }
+        }
+
+        private void createOrder(Order order)
         {
             using (Database2019EntitiesRevision database = new Database2019EntitiesRevision())
             {
                 try
                 {
-                    Order order = new Order();
-                    order.cashier = loginnedUser.Id;
-                    order.member = 2;
-                    order.status = 1;
-                    order.total = 10000;
-                    order.comment = "new order";
-                    order.date = dateTimePicker1.Value;
-
                     database.Orders.Add(order);
+                    Order order1 = new Order();
                     database.SaveChanges();
 
-                    MessageBox.Show("Success!");
+                    //billItems.ForEach(d =>
+                    //{
+                    //  OrderItem orderItem = new OrderItem();
+                    //orderItem.menu = d.id;
+                    //orderItem.order = order1.Id;
+                    //orderItem.quantity = d.quantity;
 
-                    List<Order> orders = database.Orders.ToList<Order>();
-                    dataGridView3.DataSource = orders;
+                    //database.OrderItems.Add(orderItem);
+                    //database.SaveChanges();
+                    //});
+                    billItems = new List<BillItem>();
+                    refreshBillFix();
+                    refreshOrder();
                 }
                 catch
                 {
@@ -217,16 +329,12 @@ namespace Kafe
             }
         }
 
-        private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            button2.Enabled = true;
-        }
 
         private void button2_Click(object sender, EventArgs e)
         {
             try
             {
-                int selectedBillItemId = int.Parse(dataGridView1.SelectedCells[0].Value.ToString());
+                int selectedBillItemId = int.Parse(dataGridView4.SelectedCells[0].Value.ToString());
                 BillItem item = billItems.Where(d => d.id == selectedBillItemId).FirstOrDefault();
 
                 using (Database2019EntitiesRevision database = new Database2019EntitiesRevision())
@@ -243,7 +351,7 @@ namespace Kafe
                 }
 
                 billItems.Remove(item);
-                refreshBill();
+                refreshBillFix();
                 MessageBox.Show("Bill Item Canceled!");
             } catch
             {

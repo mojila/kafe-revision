@@ -33,5 +33,6 @@ namespace Kafe
         public virtual DbSet<MenuView> MenuViews { get; set; }
         public virtual DbSet<UserView> UserViews { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<OrderItem> OrderItems { get; set; }
     }
 }
